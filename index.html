@@ -6,8 +6,8 @@
 
     <title>Assignment 2.</title>
 
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-
+<!--    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+-->
     <!--
     <meta name="description" content="The HTML5 Herald">
     <meta name="author" content="SitePoint">
@@ -24,15 +24,162 @@
 <script src="js/script.js"></script>
 
 <body>
+<style>
+    .top-header{
+
+        background-color: lightgray;
+        width: 100%;
+        height: 50px;
+    }
+    #logo, #title, #search-input{
+
+        float: left;
+        display: inline;
+    }
+    #search-input{
+        display: inline;
+
+    }
+    .float-left{
+        float: left;
+    }
+    .float-right{
+        float: right;
+    }
+    #movies-grid .image{
+
+        float: left;
+        margin: 30px;
+        border: 1px solid lightgray;
+
+    }
+    #movies-grid .image img{
+        padding: 5px;
+        height: 200px;
+        width: 200px;
+    }
+    #movies-grid .image .rating,
+    #movies-grid .image .description,
+    #movies-grid .image .starring
+    {
+        display: none;
+    }
+    #movies-grid .name,
+    #movies-grid .year{
+        text-align: center;
+        font-weight: bold;
+    }
+    .img-wrapper{
+        position: relative;
+    }
+    #movies-grid .image .img-wrapper .name-and-year{
+        background-color: rgba(0, 0, 0, 0.4);
+        position: absolute;
+        top: 165px;
+        color: white;
+        height: 40px;
+        width: 200px;
+        left: 5px;
+
+    }
+    #movies-grid .image .img-wrapper .name,
+    #movies-grid .image .img-wrapper .year{
+        margin:0px;
+    }
+</style>
 <div class="container">
 
 
     <section class="header">
 
+        <div class="top-header">
+            <div id="logo"><img src="images/sd.png"></div>
+            <div id="title">Rent A Movie</div>
+            <input type="text" id="search-input">
+            <input type="submit" id="submit-search" value="Search">
+
+        </div>
 
     </section>
-    <section class="body">
+    <section class="controls">
 
+        <div class="float-left">Sort By</div>
+        <select>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+        </select>
+        <div class="float-right">control2</div>
+        <div class="float-right">control1</div>
+    </section>
+
+    <div class="body">
+
+        <div id="movies-grid">
+            <div class="image">
+               <div class="img-wrapper">
+                <img src="images/strange.jpg">
+                <div class="name-and-year">
+                    <p class="name">Dr strange</p>
+                    <p class="year">(2016)</p>
+                </div>
+               </div>
+                <p class="rating">rating</p>
+                <p class="starring">starring</p>
+                <p class="description">about the movie</p>
+
+            </div>
+            <div class="image">
+                <div class="img-wrapper">
+                    <img src="images/strange.jpg">
+                    <div class="name-and-year">
+                        <p class="name">Dr strange</p>
+                        <p class="year">(2016)</p>
+                    </div>
+                </div>
+                <p class="rating">rating</p>
+                <p class="starring">starring</p>
+                <p class="description">about the movie</p>
+
+            </div><div class="image">
+            <div class="img-wrapper">
+                <img src="images/strange.jpg">
+                <div class="name-and-year">
+                    <p class="name">Dr strange</p>
+                    <p class="year">(2016)</p>
+                </div>
+            </div>
+            <p class="rating">rating</p>
+            <p class="starring">starring</p>
+            <p class="description">about the movie</p>
+
+        </div><div class="image">
+            <div class="img-wrapper">
+                <img src="images/strange.jpg">
+                <div class="name-and-year">
+                    <p class="name">Dr strange</p>
+                    <p class="year">(2016)</p>
+                </div>
+            </div>
+            <p class="rating">rating</p>
+            <p class="starring">starring</p>
+            <p class="description">about the movie</p>
+
+        </div><div class="image">
+            <div class="img-wrapper">
+                <img src="images/strange.jpg">
+                <div class="name-and-year">
+                    <p class="name">Dr strange</p>
+                    <p class="year">(2016)</p>
+                </div>
+            </div>
+            <p class="rating">rating</p>
+            <p class="starring">starring</p>
+            <p class="description">about the movie</p>
+
+        </div>
+        </div>
+
+    </div>
 
     </section>
 
