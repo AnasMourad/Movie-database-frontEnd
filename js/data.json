@@ -1,0 +1,10 @@
+{"movies":[
+    {"id":"1" ,"description": "Beautiful mind discription", "image": "A_Beautiful_Mind.jpg", "name":"Beautiful mind", "year":"20xx", "rating":"5", "starring":"one two threee" },
+    {"id":"2","description": "Batman V Superman discription", "image": "Batman_v_Superman.jpg", "name":"Batman v superman", "year":"2016", "rating":"5", "starring":"" },
+    {"id":"3","description": "nobody discription", "image": "nobody.jpg", "name":"Mr nobody", "year":"2000", "rating":"5", "starring":"" },
+    {"id":"4","description": "prestige description", "image": "prestige.jpg", "name":"The prestige", "year":"2000", "rating":"5", "starring":""},
+    {"id":"5","description": "Dr strange description", "image": "strange.jpg", "name":"Dr Strange", "year":"2016", "rating":"5", "starring":""},
+    {"id":"6","description": "Harry potter DH pt1", "image": "deathly-hallows.jpg", "name":"Harry potter", "year":"2016", "rating":"5", "starring":"" }
+]}
+
+
