@@ -28,6 +28,9 @@
 
 <body>
 <style>
+    .gray{
+        color: gray;
+    }
     .top-header{
 
         background-color: lightgray;
@@ -56,17 +59,31 @@
         border: 1px solid lightgray;
 
     }
-    #movies-grid .image img{
+    #movies-grid .image img.movie-image{
         padding: 5px;
         height: 200px;
         width: 200px;
     }
     #movies-grid .image .rating,
-    #movies-grid .image .description,
-    #movies-grid .image .starring
+    #movies-grid .image .description
     {
         display: none;
     }
+    #movies-grid .image .starring{
+
+        position: absolute;
+        transition: 1s;
+        top: 150px;
+        color: white;
+        height: 40px;
+        width: 200px;
+        left: 5px;
+        text-align: left;
+        display: none;
+        background-color: rgba(0,0,0,0);
+
+    }
+
     #movies-grid .name,
     #movies-grid .year{
         text-align: center;
@@ -76,9 +93,10 @@
         position: relative;
     }
     #movies-grid .image .img-wrapper .name-and-year{
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.6);
         position: absolute;
         top: 165px;
+
         color: white;
         height: 40px;
         width: 200px;
@@ -148,12 +166,15 @@
     #movies-list .image{
         position: relative;
     }
-    #movies-list .image .img-wrapper img{
+    #movies-grid .image{
+        position: relative;
+    }
+    #movies-list .image .img-wrapper img.movie-image{
 
         height: 220px;
         width: 220px;
         padding: 5px;
-        margin: 15px 10px 10px 10px;
+
         border: 1px solid lightgray;
         float: left;
     }
@@ -161,6 +182,7 @@
         font-size: 18px;
         margin: 0px;
         padding: 10px;
+        padding-top: 0px;
         text-transform: uppercase;
         font-weight: bold;
         float: left;
@@ -176,17 +198,19 @@
         font-size: 15px;
         margin: 0px;
         padding: 10px;
+        padding-top:0;
         color: gray;
 
     }
     #movies-list .image .starring:before{
-        content: 'Starring: ';
+
         font-weight: bold;
     }
     #movies-list .image .rating:before {
         content: 'Rating: ';
         font-weight: bold;
     }
+
     #movies-list .image .rating div.one-star{
 
     }
@@ -205,18 +229,97 @@
     #movies-list .image p.description{
         line-height: 1.5;
         width: 450px;
-        background-color: rgb(236, 255, 255)    ;
+        background-color: rgb(236, 255, 255);
         position: absolute;
         top: 100px;
-        left: 250px;
+        left: 242px;
     }
+    #movies-list .image p.rating{
+        width: 450px;
+        position: absolute;
+        top: 40px;
+        left: 242px;
+    }
+
+    #movies-list .image p.starring{
+        width: 450px;
+        position: absolute;
+        top: 60px;
+        left: 242px;
+    }
+
+
 
     #movies-list{
         height: 1000px;
     }
-    div#movies-list div.image{
-        height: 300px
+
+
+    /*Suggestion Box*/
+    div.suggestions{
+        position:absolute;
+        top:25px;
+        z-index:50;
+        border-color:lightgray;
+        background-color:white;
+        border-style:solid;
+        border-width: 1px;
+        width:150px;
+        overflow:auto;
+        margin-left: 200px;
+        margin-top: 20px;
+        -webkit-border-radius:0 0 5px 5px ;
+        -moz-border-radius:0 0 5px 5px ;
+        border-radius: 0 0 5px 5px;
+        width: 300px;
+        display: none;
     }
+
+    div.sub_suggestions{
+        width:inherit;
+
+    }
+
+    div.sub_suggestions:hover{
+        background-color:gainsboro;
+    }
+    .hd img {
+        background-color:transparent;
+        position: absolute;
+        top: 15px;
+        left: 15px;
+
+        height: 30px;
+        width: 40px;
+    }
+    .image .img-wrapper .hd img{
+        background-color:transparent;
+
+        height: 30px;
+        width: 40px;
+    }
+    /*hovering over grid photos*/
+    #movies-grid .image:hover .name-and-year{
+        height: 120px;
+        top:85px;
+    }
+    #movies-grid .image:hover p.starring{
+
+        display: block;
+        background-color: rgba(0,0,0,0.7);
+    }
+
+    /* 240 + top and bottom margins = 260?*/
+    #movies-list .image{
+        top: 10px;
+        height: 240px;
+        padding-top: 10px;
+        padding-bottom:10px;
+        margin: 10px;
+        border-top: 1px lightgray solid;
+
+    }
+
 
 </style>
 <div class="container">
@@ -230,6 +333,14 @@
             <form id="submit-form">
                 <input type="text" id="search-input">
                 <input type="submit" id="submit-search" value="Search">
+                <div id="suggestions_box" class="suggestions">
+                    <!--dummy fields for test
+                    <div class="sub_suggestions">one</div>
+                    <div class="sub_suggestions">one</div>
+                    <div class="sub_suggestions">one</div>
+                    <div class="sub_suggestions">one</div>
+                -->
+                </div>
             </form>
         </div>
 
@@ -238,11 +349,11 @@
 
         <div class="float-left sort">Sort By</div>
         <select>
-            <option value="volvo">Alphabetic</option>
-            <option value="saab">Date</option>
+            <option value="rate">Rating</option>
+            <option value="year">Year</option>
         </select>
-        <img id="list_icon" class="float-right" title="list" src="images/list.jpg">
-        <img id="grid_icon" class="float-right" title="grid" src="images/grid_pressed.jpg"/div>
+        <a href="#"><img id="list_icon" class="float-right" title="list" src="images/list.jpg"></a>
+        <a href="#"><img id="grid_icon" class="float-right" title="grid" src="images/grid_pressed.jpg"/div></a>
     </section>
 
     <div class="body">
@@ -250,7 +361,9 @@
         <div id="movies-grid">
             <div class="image">
                <div class="img-wrapper">
-                <img src="images/strange.jpg">
+
+                   <div class="hd"><img src="images/hd.png"></div>
+                <img class="movie-image" src="images/strange.jpg">
                 <div class="name-and-year">
                     <p class="name">Dr strange</p>
                     <p class="year">2016</p>
@@ -269,7 +382,10 @@
 
             <div class="image">
                 <div class="img-wrapper">
-                    <img src="images/strange.jpg">
+
+                    <div class="hd"><img src="images/hd.png"></div>
+
+                    <img class="movie-image" src="images/strange.jpg">
                     <div class="name-and-year">
                         <p class="name">Dr strange</p>
                         <p class="year">2016</p>
@@ -284,26 +400,26 @@
 
                 </p>
 
-            </div>
+            </div><div class="image">
+            <div class="img-wrapper">
 
-            <div class="image">
-                <div class="img-wrapper">
-                    <img src="images/strange.jpg">
-                    <div class="name-and-year">
-                        <p class="name">Dr strange</p>
-                        <p class="year">2016</p>
-                    </div>
+                <div class="hd"><img src="images/hd.png"></div>
+                <img class="movie-image" src="images/strange.jpg">
+                <div class="name-and-year">
+                    <p class="name">Dr strange</p>
+                    <p class="year">2016</p>
                 </div>
-                <p class="starring">starring</p>
-
-                <p class="rating">rating</p>
-                <p class="description">about the movieabout the movieabout the movieabout the movieabout the movieabout the movieabout the movieabout the movieabout the movie
-                    about the movieabout the movieabout the movieabout the movieabout the movieabout the movie
-                    about the movieabout the movieabout the movieabout the movieabout the movieabout the movieabout the movieabout the movie
-
-                </p>
-
             </div>
+            <p class="starring">starring</p>
+
+            <p class="rating">rating</p>
+            <p class="description">about the movieabout the movieabout the movieabout the movieabout the movieabout the movieabout the movieabout the movieabout the movie
+                about the movieabout the movieabout the movieabout the movieabout the movieabout the movie
+                about the movieabout the movieabout the movieabout the movieabout the movieabout the movieabout the movieabout the movie
+
+            </p>
+
+        </div>
 
 
         </div>

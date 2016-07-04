@@ -9,6 +9,7 @@ function htmlMaker(template) { //this class is used to generate dynamic HTML
 //the parameters are passed as an associative array. They are used as parameters in the template
 htmlMaker.prototype.getHTML = function (values) {
     var html = "";
+
     if ($.isArray(values))
         for (var i = 0; i < values.length; ++i) {
             html+=this.get_html_unrepeated(values[i]);
@@ -22,7 +23,11 @@ htmlMaker.prototype.getHTML = function (values) {
 
 htmlMaker.prototype.get_html_unrepeated=function(values){
     var html=this.template;
+    var isHD=false;
     for (var key in values){
+        if(key=="hd" && values[key]==true){
+            isHD = true;
+        }
         if ($.isArray(values[key]))
             html= this.replace_Block(key, values[key],html);
         else{
@@ -30,7 +35,16 @@ htmlMaker.prototype.get_html_unrepeated=function(values){
             html = html.replace(re,values[key]);
         }
     }
+    //Adding hd logo thru JS
+    if(isHD == true){
+        //
+        var start = html.search('<img class="movie-image"');
+        html = html.slice(0, start) + '<div class="hd"><img src="images/hd.png"></div>' + html.slice(start);
+    }
+
+
     return html;
+
 }
 
 //the parameters are used for a repetitive a block
