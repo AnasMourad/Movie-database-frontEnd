@@ -42,6 +42,9 @@
         float: left;
         display: inline;
     }
+    #title{
+        font-family: Oleo;
+    }
     #search-input{
         display: inline;
 
@@ -206,27 +209,10 @@
 
         font-weight: bold;
     }
-    #movies-list .image .rating:before {
-        content: 'Rating: ';
-        font-weight: bold;
-    }
 
-    #movies-list .image .rating div.one-star{
 
-    }
-    #movies-list .image .rating div.two-star{
-
-    }
-    #movies-list .image .rating div.three-star{
-
-    }
-    #movies-list .image .rating div.four-star{
-
-    }
-    #movies-list .image .rating div.five-star{
-
-    }
     #movies-list .image p.description{
+        overflow: scroll;
         line-height: 1.5;
         width: 450px;
         background-color: rgb(236, 255, 255);
@@ -234,9 +220,10 @@
         top: 100px;
         left: 242px;
     }
-    #movies-list .image p.rating{
+    #movies-list .image div.rating{
         width: 450px;
         position: absolute;
+
         top: 40px;
         left: 242px;
     }
@@ -266,7 +253,7 @@
         border-width: 1px;
         width:150px;
         overflow:auto;
-        margin-left: 200px;
+        margin-left: 250px;
         margin-top: 20px;
         -webkit-border-radius:0 0 5px 5px ;
         -moz-border-radius:0 0 5px 5px ;
@@ -318,6 +305,21 @@
         margin: 10px;
         border-top: 1px lightgray solid;
 
+    }
+    .star{
+        float:left;
+        width: 20px;
+        height: 20px;
+
+    }
+    .star img{
+        width: 20px;
+        height:20px;
+    }
+
+    @font-face {
+        font-family: Oleo;
+        src: url(fonts/Oleo.woff);
     }
 
 

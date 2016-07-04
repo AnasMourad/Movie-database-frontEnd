@@ -23,11 +23,10 @@ htmlMaker.prototype.getHTML = function (values) {
 
 htmlMaker.prototype.get_html_unrepeated=function(values){
     var html=this.template;
-    var isHD=false;
+    var isHD= values["hd"];
+    var rating = values["rating"];
     for (var key in values){
-        if(key=="hd" && values[key]==true){
-            isHD = true;
-        }
+
         if ($.isArray(values[key]))
             html= this.replace_Block(key, values[key],html);
         else{
@@ -42,7 +41,16 @@ htmlMaker.prototype.get_html_unrepeated=function(values){
         html = html.slice(0, start) + '<div class="hd"><img src="images/hd.png"></div>' + html.slice(start);
     }
 
-
+    var start = html.search('<div class="rating">');
+    var len = '<div class="rating">'.length;
+    ratingStr="";
+    for(var i=0;i<rating;++i){
+        ratingStr+="<div class='star'><img src='images/gold_star.png'></div>";
+    }
+    for(var i=0;i<5-rating;++i){
+        ratingStr+="<div class='star'><img src='images/regular_star.png'></div>";
+    }
+    html =  html.slice(0, start+len)+ratingStr+html.slice(start+len);
     return html;
 
 }

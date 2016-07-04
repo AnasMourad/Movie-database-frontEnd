@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-
+    var show=false;//for showing suggestions
     var movies;
     $.ajax({
         url: 'js/data.json',
@@ -14,6 +14,7 @@ $( document ).ready(function() {
             $.get("photo.html", function (template) {
                 template_copy = template;
                 display(template, movies["movies"]);
+                show=false;
 
             });
             var suggestions=movies["movies"];
@@ -22,13 +23,14 @@ $( document ).ready(function() {
                     console.log(suggestions);
 
 
+
              });
             //display the suggestions when click on search
             $("#submit-search").on("click", function(e){
                 e.preventDefault();
                 suggestions = live_search();
                 display(template_copy, suggestions);
-
+                $("#suggestions_box").hide();
             });
             $( "select" ).change(function() {
                 if($(this).val()=="year"){
@@ -84,20 +86,25 @@ $( document ).ready(function() {
     function live_search(){
 
         var value = $("#search-input").val(); //get the value of the text field
-        var show=false; //don't show suggestions
+        show=false; //don't show suggestions
 
         //by name
         var html="";
         var suggestions = [];
         $.each(movies["movies"], function (i, val) {
-            var start = movies["movies"][i].name.toLowerCase().search(value.toLowerCase().trim());
-            if (start != -1 && value!="") { //if there is a search match
-                suggestions.push( movies["movies"][i]);
-                //console.log(movies["movies"][i]);
-                html += "<div class='sub_suggestions' data-item='" + movies["movies"][i].name + "' >";
-                html += movies["movies"][i].name + "<span class='gray'>"+' ('+movies["movies"][i].year+") " + movies["movies"][i].starring+"</span>";
-                html += "</div>";
-                show=true; //show suggestions
+            var start_name = movies["movies"][i].name.toLowerCase().search(value.toLowerCase().trim());
+            var start_year = movies["movies"][i].year.toLowerCase().search(value.toLowerCase().trim());
+            var start_starring =movies["movies"][i].starring.toLowerCase().search(value.toLowerCase().trim());
+            var start_rating = ((movies["movies"][i].rating==value)?1:-1);
+            if ((start_name != -1 && value!="" )||(start_year != -1 && value!="" )
+                ||(start_starring != -1 && value!="" ) ||(start_rating != -1 && value!="" )) { //if there is a search match
+
+                    suggestions.push( movies["movies"][i]);
+                    //console.log(movies["movies"][i]);
+                    html += "<div class='sub_suggestions' data-item='" + movies["movies"][i].name + "' >";
+                    html += movies["movies"][i].name + "<span class='gray'>"+' ('+movies["movies"][i].year+") " + movies["movies"][i].starring+"</span>";
+                    html += "</div>";
+                    show=true; //show suggestions
             }
         });
         if(show){
@@ -110,6 +117,7 @@ $( document ).ready(function() {
             });
 
             $("#suggestions_box").show();
+            show = false;
         }
         else
             $("#suggestions_box").hide();
