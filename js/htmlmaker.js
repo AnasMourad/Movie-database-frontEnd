@@ -41,6 +41,7 @@ htmlMaker.prototype.get_html_unrepeated=function(values){
         html = html.slice(0, start) + '<div class="hd"><img src="images/hd.png"></div>' + html.slice(start);
     }
 
+    /*ADDING THE STARS TO THE MOVIE*/
     var start = html.search('<div class="rating">');
     var len = '<div class="rating">'.length;
     ratingStr="";

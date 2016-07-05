@@ -1,3 +1,4 @@
+/*MISC CSS style*/
 .gray{
     color: gray;
 }
@@ -25,6 +26,18 @@
 .float-right{
     float: right;
 }
+
+.top-header{
+    margin-bottom: 20px;
+}
+
+.sort{
+    margin-left: 35px
+}
+
+/*END of MISC CSS style*/
+
+/*begin of movie-grid layout*/
 #movies-grid .image{
 
     float: left;
@@ -80,6 +93,18 @@
 #movies-grid .image .img-wrapper .year{
     margin:0px;
 }
+#movies-grid .image:hover .name-and-year{
+    height: 120px;
+    top:85px;
+}
+#movies-grid .image:hover p.starring{
+
+    display: block;
+    background-color: rgba(0,0,0,0.7);
+}
+
+/*end of movies-grid layout display*/
+
 
 #logo img{
     width: 50px;
@@ -127,12 +152,6 @@
     -moz-border-radius:3px;
     border-radius:0px 3px 3px 0px;
     margin-left: -15px;
-}
-.top-header{
-    margin-bottom: 20px;
-}
-.sort{
-    margin-left: 35px
 }
 
 /*List view begins*/
@@ -205,12 +224,23 @@
     left: 242px;
 }
 
-
-
 #movies-list{
     height: 1000px;
 }
 
+/* 240 + top and bottom margins = 260?*/
+#movies-list .image{
+    top: 10px;
+    height: 240px;
+    padding-top: 10px;
+    padding-bottom:10px;
+    margin: 10px;
+    border-top: 1px lightgray solid;
+
+}
+
+
+/*end of movie-list layout display*/
 
 /*Suggestion Box*/
 div.suggestions{
@@ -256,26 +286,8 @@ div.sub_suggestions:hover{
     width: 40px;
 }
 /*hovering over grid photos*/
-#movies-grid .image:hover .name-and-year{
-    height: 120px;
-    top:85px;
-}
-#movies-grid .image:hover p.starring{
 
-    display: block;
-    background-color: rgba(0,0,0,0.7);
-}
 
-/* 240 + top and bottom margins = 260?*/
-#movies-list .image{
-    top: 10px;
-    height: 240px;
-    padding-top: 10px;
-    padding-bottom:10px;
-    margin: 10px;
-    border-top: 1px lightgray solid;
-
-}
 .star{
     float:left;
     width: 20px;
@@ -301,6 +313,7 @@ div.sub_suggestions:hover{
     position: relative;
     top: 60px;
 }
+/**Fixing additional margin and padding added by the browser**/
 body{
     margin:0;
     padding: 0;

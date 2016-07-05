@@ -1,6 +1,10 @@
 $( document ).ready(function() {
     var show=false;//for showing suggestions
     var movies;
+    /**
+     * TWO NESTED AJAX CALLS
+     * FIRST TO LOAD JSON DATA, AND THE SECOND TO LOAD THE HTML FOR EACH SINGLE MOVIE
+     */
     $.ajax({
         url: 'js/data.json',
         data: {},
@@ -18,6 +22,7 @@ $( document ).ready(function() {
 
             });
             var suggestions=movies["movies"];
+            //LISTENING TO THE TEXT INPUT
             $("#search-input").on('keyup',function(){
                  suggestions = live_search();
                     console.log(suggestions);
@@ -25,7 +30,7 @@ $( document ).ready(function() {
 
 
              });
-            //display the suggestions when click on search
+            //LISTENING TO THE SEARCH BUTTON TO APPLY THE LIVE SEARCH
             $("#submit-search").on("click", function(e){
                 e.preventDefault();
                 suggestions = live_search();
@@ -43,6 +48,12 @@ $( document ).ready(function() {
 
         }
     });
+
+    /**
+     * FUNCTION USED TO SORT CURRENT DISPLAYED MOVIES BY YEAR
+     * @param template: the html template of photo.
+     * @param suggestion: the current displayed suggestions.
+     * **/
     function sortByYear(template, suggestions){
         console.log(suggestions);
         suggestions.sort(function(a, b){
@@ -55,7 +66,14 @@ $( document ).ready(function() {
             }
         });
         display(template, suggestions);
+
     }
+
+    /**
+     * FUNCTION USED TO SORT CURRENT DISPLAYED MOVIES BY RATING
+     * @param template: the html template of photo.
+     * @param suggestion: the current displayed suggestions.
+     * **/
     function sortByRating(template, suggestions){
         suggestions.sort(function(a, b){
 
@@ -70,7 +88,11 @@ $( document ).ready(function() {
 
         display(template, suggestions);
     }
-    //Function display is responsible for displaying data
+    /***
+     * function to display the current movies
+     * @param template: HTML template of photo
+     * @param movies: suggested movies
+     */
     function display(template, movies){
         var html_maker = new htmlMaker(template); //create an html Maker
         var html = html_maker.getHTML(movies); //generate dynamic HTML based on the data
@@ -81,7 +103,13 @@ $( document ).ready(function() {
         }
     }
 
-    //live search functionality
+    /***
+     * Live_search
+     * functionality for live search. It suggests as the user writes the
+     * name, year, starrings, rating, .. of the movie
+     *
+     * @returns {Array of suggested movies}
+     */
 
     function live_search(){
 
@@ -92,6 +120,9 @@ $( document ).ready(function() {
         var html="";
         var suggestions = [];
         $.each(movies["movies"], function (i, val) {
+            /**
+             * SEARCHING by name, year, starring, rating
+             */
             var start_name = movies["movies"][i].name.toLowerCase().search(value.toLowerCase().trim());
             var start_year = movies["movies"][i].year.toLowerCase().search(value.toLowerCase().trim());
             var start_starring =movies["movies"][i].starring.toLowerCase().search(value.toLowerCase().trim());
@@ -107,6 +138,7 @@ $( document ).ready(function() {
                     show=true; //show suggestions
             }
         });
+        ///SHOW THE SUGGESTION BOX IF THERE IS SUGGESTIONS AVAILABLE
         if(show){
             $("#suggestions_box").html(html);
             //get the children of suggestions_box with .sub_suggestions class
@@ -127,6 +159,12 @@ $( document ).ready(function() {
 
         return suggestions;
     }
+
+    /**
+     *
+     * ADDING LISTENERS TO THE ICONS RESPONSIBLE FOR
+     * SWITCHING BETWEEN GRID AND LIST
+     */
     $("#list_icon").on('click', function(){
 
         $("#movies-grid").attr("id", "movies-list");
